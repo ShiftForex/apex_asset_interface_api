@@ -1,0 +1,15 @@
+Instructions to install required libraries:
+
+Step1: Open console and change directory to /api-server
+Step2: Type the following commands in console: 
+	npm install express
+	npm install body-parser
+	npm install xml2js
+
+
+Instructions to start Node server:
+
+Step1: Open console and change directory to /api-server 
+Step2: Type the command: node app.js 
+Step3: If you see the message in console "Listening on port 3000...", it means the server is up and running.
+

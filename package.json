@@ -1,0 +1,35 @@
+{
+  "name": "gubiq-js",
+  "version": "1.0.0",
+  "description": "A node.js app to communicate with the gubiq server to create addresses, relay deposits to APEX and send withdraws",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alphapoint/gubiq-js.git"
+  },
+  "keywords": [
+    "gubiq"
+  ],
+  "author": "Vijay Rajan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alphapoint/gubiq-js/issues"
+  },
+  "homepage": "https://github.com/alphapoint/gubiq-js#readme",
+  "dependencies": {
+    "big-number": "^0.4.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.34",
+    "request": "^2.83.0",
+    "web3": "^1.0.0-beta.29",
+    "websocket": "^1.0.25",
+    "xml2js": "^0.4.19"
+  }
+}
