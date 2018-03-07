@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/uploadXml',bodyParser.text({type: '*/xml'}), function (req,res,next){
         next();
-    });
+});
 app.use(express.static('../client'));
 app.use(function (req, res, next) {
 
@@ -32,9 +32,9 @@ app.use(function (req, res, next) {
 });
  
 var gubiqRoutes = require("./routes/gubiq-query.js")(app);
-var gubiqAccountRoutes = require("./routes/iotaAccount.js")(app);
-var websocketRoutes = require("./lib/websocketClient.js");
-var database = require("./lib/database.js");
+var gubiqAccountRoutes = require("./routes/gubiqAccount.js")(app);
+//var websocketRoutes = require("./lib/websocketClient.js");
+//var database = require("./lib/database.js");
  
 var server = app.listen(6000, function () {
     console.log("Listening on port %s...", server.address().port);

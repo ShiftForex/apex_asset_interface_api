@@ -7,16 +7,17 @@ config.websocketURL = "ws://localhost:14000/ws/";
 config.env = 'Mainnet'; //prod
 
 /* Account configuration*/
-config.sweepAddress = 'OIZAEJXNCPK9FURBZYWXUAISMDJJHZUPYQBXYSGTIFQFFPYMUVJKBZ9RNRZNGRJUXWUOCTGBJKTQUEXIC';
-config.password = 'BEWDRLWSEDUTJYEDGKQTVZHNUQRIWGGA99IFVHXGNJZYRHYWUJXLCRREEUGMDOTCSOYLHFEEQWHEPTNCB';
-config.centsPerToken = 1000000;
-
+config.SweepAccount = '0x187305c49dbf8fcb9ae4b8906cf404b4ad1e77da';
+config.SweepAccountPassphrase = 'Test1234';
+config.gas = "21000";
+config.centsPerEther = 1000000000000000000;
+config.DepositConfirmations = 1;
 /* local Database configuration */
-config.mongoURL = 'mongodb://localhost:27017/IOTA';
+/*config.mongoURL = 'mongodb://localhost:27017/IOTA';
 config.addressCol  = 'address';
 config.countersCol = "counters";
 config.withdrawHashCol = "withdrawHashes";
-config.sequenceName = "keyInex";
+config.sequenceName = "keyInex";*/
 
 /* Static parameters */
 config.DepositComplete = 'Complete';

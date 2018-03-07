@@ -2,8 +2,6 @@ var appRouter = function(app) {
 
     var gubiqAccount = require("../lib/gubiq-account-routes.js")
     var config = require("../config.js");
-    //var database = require("../lib/database.js");
-    var websocket = require("../lib/websocketClient.js");
 
     app.post("/getNewAddress", function(req, res) {
 
@@ -24,7 +22,6 @@ var appRouter = function(app) {
             }
             else{
                 console.log("getNewAddress details");
-                console.log("keyIndex: "+ index);
                 console.log(result);
                 res.status(200).send({address: result}); 
                 return;
@@ -32,14 +29,14 @@ var appRouter = function(app) {
         });
     });
 
-    app.post("/getBalances", function(req, res) {
+    app.post("/getBalance", function(req, res) {
 
-        console.log("getBalances");
+        console.log("getBalance");
         console.log(req.body);
         var method = req.body.method;
         var address = req.body.address;
         
-        if(method != 'getBalances' || method === null)
+        if(method != 'getBalance' || method === null)
         {
             res.status(401).send({ msg: "Invalid function!!"}); 
             return;
@@ -51,7 +48,7 @@ var appRouter = function(app) {
             return;
         }
     
-        gubiqAccount.getBalances(address, function(err,result){
+        gubiqAccount.getBalance(address, function(err,result){
             if(err) {
                 res.status(401).send({ msg: result}); 
                 return;
@@ -126,11 +123,11 @@ var appRouter = function(app) {
         var method = req.body.method;
         var accountId = req.body.accountId;
         var toAddress = req.body.toAddress;
-        var fromAddress = req.body.toAddress;
-        var value = parseInt(req.body.value);
+        var fromAddress = req.body.fromAddress;
+        var value = parseFloat(req.body.value) * config.centsPerEther;
         var comment = req.body.comment;
         
-        if(method != 'sendTransfer')
+        if(method != 'sendTransaction')
         {
             res.status(401).send({ msg: "Invalid function!!"}); 
             return;
