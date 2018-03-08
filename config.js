@@ -9,7 +9,7 @@ config.env = 'Mainnet'; //prod
 /* Account configuration*/
 config.SweepAccount = '0x187305c49dbf8fcb9ae4b8906cf404b4ad1e77da';
 config.SweepAccountPassphrase = 'Test1234';
-config.gas = "21000";
+config.gas = "100000";
 config.centsPerEther = 1000000000000000000;
 config.DepositConfirmations = 1;
 /* local Database configuration */
