@@ -1,7 +1,10 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var request = require('request');
- 
+var W3CWebSocket = require('websocket').w3cwebsocket;
+var fs = require('fs');
+var util = require('util');
+
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.text());
@@ -30,11 +33,17 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+console.log = function(d) { //
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+};
  
 var gubiqRoutes = require("./routes/gubiq-query.js")(app);
 var gubiqAccountRoutes = require("./routes/gubiqAccount.js")(app);
-//var websocketRoutes = require("./lib/websocketClient.js");
-//var database = require("./lib/database.js");
+var websocketRoutes = require("./lib/websocketClient.js");
  
 var server = app.listen(6000, function () {
     console.log("Listening on port %s...", server.address().port);

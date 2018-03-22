@@ -146,6 +146,31 @@ var appRouter = function(app) {
             }
         });
     });
+	
+	app.post("/sendDeposit", function(req, res) {
+
+		console.log("sendDeposit");
+		console.log(req.body);
+		var method = req.body.method;
+		var payload = req.body.params[0];
+
+		if(method != 'sendDeposit')
+		{
+			res.status(401).send({ msg: "Invalid function!!"}); 
+			return;
+		}
+
+		websocketRoutes.payload(address, function(err,result){
+			if(err) {
+				res.status(401).send({ msg: "Failed"}); 
+				return;
+			}
+			else{
+				res.status(200).send({result: result});
+				return;
+			}
+		});
+    });
 }
 
 module.exports = appRouter;
