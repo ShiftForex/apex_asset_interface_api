@@ -14,13 +14,6 @@ config.gas = "100000";
 config.centsPerEther = 1000000000000000000;
 config.DepositConfirmations = 1;
 
-/* local Database configuration */
-/*config.mongoURL = 'mongodb://localhost:27017/IOTA';
-config.addressCol  = 'address';
-config.countersCol = "counters";
-config.withdrawHashCol = "withdrawHashes";
-config.sequenceName = "keyInex";*/
-
 /* Static parameters */
 config.DepositComplete = 'Complete';
 config.DepositPending = 'Pending';
