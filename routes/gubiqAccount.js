@@ -2,11 +2,12 @@ var appRouter = function(app) {
 
     var gubiqAccount = require("../lib/gubiq-account-routes.js")
     var config = require("../config.js");
-
+    const log = require('simple-node-logger').createRollingFileLogger( config.logOptions );
+    
     app.post("/getNewAddress", function(req, res) {
 
-        console.log("getNewAddress");
-        console.log(req.body);
+        log.info("getNewAddress");
+        log.info(req.body);
         var method = req.body.method;
 
         if(method != 'getNewAddress' || method === null)
@@ -21,8 +22,8 @@ var appRouter = function(app) {
                 return;
             }
             else{
-                console.log("getNewAddress details");
-                console.log(result);
+                log.info("getNewAddress details");
+                log.info(result);
                 res.status(200).send({address: result}); 
                 return;
             }
@@ -31,8 +32,8 @@ var appRouter = function(app) {
 
     app.post("/getBalance", function(req, res) {
 
-        console.log("getBalance");
-        console.log(req.body);
+        log.info("getBalance");
+        log.info(req.body);
         var method = req.body.method;
         var address = req.body.address;
         
@@ -55,7 +56,7 @@ var appRouter = function(app) {
             }
             else
             {
-                console.log("getBalances: " + JSON.stringify(result));
+                log.info("getBalances: " + JSON.stringify(result));
                 res.status(200).send({result});
                 return;
             }
@@ -64,8 +65,8 @@ var appRouter = function(app) {
 
     app.post("/getTransaction", function(req, res) {
 
-        console.log("getTransaction");
-        console.log(req.body);
+        log.info("getTransaction");
+        log.info(req.body);
         var method = req.body.method;
         var transactionHash = req.body.transactionHash;
 
@@ -82,7 +83,7 @@ var appRouter = function(app) {
             }
             else
             {
-                console.log("Transactions: " + JSON.stringify(result));
+                log.info("Transactions: " + JSON.stringify(result));
                 res.status(200).send({result});
                 return;
             }
@@ -91,8 +92,8 @@ var appRouter = function(app) {
     
     app.post("/getDepositConfirmation", function(req, res) {
 
-        console.log("getDepositConfirmation");
-        console.log(req.body);
+        log.info("getDepositConfirmation");
+        log.info(req.body);
         var method = req.body.method;
         var address = req.body.address;
 
@@ -108,8 +109,8 @@ var appRouter = function(app) {
                 return;
             }
             else{
-                console.log("getDepositConfirmation details");
-                console.log(result);
+                log.info("getDepositConfirmation details");
+                log.info(result);
                 res.status(200).send({result: result});
                 return;
             }
@@ -118,8 +119,8 @@ var appRouter = function(app) {
     
     app.post("/sendTransaction", function(req, res) {
 
-        console.log("sendTransaction");
-        console.log(req.body);
+        log.info("sendTransaction");
+        log.info(req.body);
         var method = req.body.method;
         var accountId = req.body.accountId;
         var toAddress = req.body.toAddress;
@@ -139,37 +140,12 @@ var appRouter = function(app) {
                 return;
             }
             else{
-                console.log("sendTransfer details");
-                console.log(result);
+                log.info("sendTransfer details");
+                log.info(result);
                 res.status(200).send({result: result});
                 return;
             }
         });
-    });
-	
-	app.post("/sendDeposit", function(req, res) {
-
-		console.log("sendDeposit");
-		console.log(req.body);
-		var method = req.body.method;
-		var payload = req.body.params[0];
-
-		if(method != 'sendDeposit')
-		{
-			res.status(401).send({ msg: "Invalid function!!"}); 
-			return;
-		}
-
-		websocketRoutes.payload(address, function(err,result){
-			if(err) {
-				res.status(401).send({ msg: "Failed"}); 
-				return;
-			}
-			else{
-				res.status(200).send({result: result});
-				return;
-			}
-		});
     });
 }
 

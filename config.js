@@ -27,4 +27,10 @@ config.AMUserName = "UBIQTest";
 config.AMUserPassword = "1234";
 config.AssetManagerID = 1;
 
+config.logOptions = {
+    logDirectory: __dirname + '/logs',
+    fileNamePattern: 'gubiq_app-<date>.log',
+    dateFormat:'YYYY.MM.DD'
+};
+
 module.exports = config;

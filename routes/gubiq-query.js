@@ -2,11 +2,12 @@ var gubiqRouter = function(app) {
 
     var gubiq = require("../lib/gubiq-routes.js");
     var config = require('../config.js');
-
+    const log = require('simple-node-logger').createRollingFileLogger( config.logOptions );
+    
     app.post("/getBlockNumber", function(req, res) {
 
-        console.log("getBlockNumber");
-        console.log(req.body);
+        log.info("getBlockNumber");
+        log.info(req.body);
         var method = req.body.method;
 
         if(method != 'getBlockNumber')
@@ -21,8 +22,8 @@ var gubiqRouter = function(app) {
                 return;
             }
             else{
-                console.log("getBlockNumber details");
-                console.log(result);
+                log.info("getBlockNumber details");
+                log.info(result);
                 res.status(200).send({result});
                 return;
             }
@@ -31,8 +32,8 @@ var gubiqRouter = function(app) {
     
     app.post("/getNodeinfo", function(req, res) {
 
-        console.log("getNodeInfo");
-        console.log(req.body);
+        log.info("getNodeInfo");
+        log.info(req.body);
         var method = req.body.method;
 
         if(method != 'getNodeInfo')
@@ -47,8 +48,8 @@ var gubiqRouter = function(app) {
                 return;
             }
             else{
-                console.log("getNodeInfo details");
-                console.log(result);
+                log.info("getNodeInfo details");
+                log.info(result);
                 res.status(200).send({result});
                 return;
             }
@@ -57,8 +58,8 @@ var gubiqRouter = function(app) {
     
     app.post("/getGasPrice", function(req, res) {
 
-        console.log("getGasPrice");
-        console.log(req.body);
+        log.info("getGasPrice");
+        log.info(req.body);
         var method = req.body.method;
 
         if(method != 'getGasPrice' || method === null)
@@ -74,7 +75,7 @@ var gubiqRouter = function(app) {
             }
             else
             {
-                console.log("getWalletBalance: " + JSON.stringify(result));
+                log.info("getWalletBalance: " + JSON.stringify(result));
                 res.status(200).send({result});
                 return;
             }
@@ -83,8 +84,8 @@ var gubiqRouter = function(app) {
 
     app.post("/getAccounts", function(req, res) {
 
-        console.log("getAccounts");
-        console.log(req.body);
+        log.info("getAccounts");
+        log.info(req.body);
         var method = req.body.method;
 
         if(method != 'getAccounts' || method === null)
@@ -100,7 +101,7 @@ var gubiqRouter = function(app) {
             }
             else
             {
-                console.log("getAccounts: " + JSON.stringify(result));
+                log.info("getAccounts: " + JSON.stringify(result));
                 res.status(200).send({result});
                 return;
             }
@@ -109,8 +110,8 @@ var gubiqRouter = function(app) {
     
     app.post("/isSyncing", function(req, res) {
 
-        console.log("isSyncing");
-        console.log(req.body);
+        log.info("isSyncing");
+        log.info(req.body);
         var method = req.body.method;
 
         if(method != 'isSyncing' || method === null)
@@ -126,7 +127,7 @@ var gubiqRouter = function(app) {
             }
             else
             {
-                console.log("getWalletBalance: " + JSON.stringify(result));
+                log.info("getWalletBalance: " + JSON.stringify(result));
                 res.status(200).send({result});
                 return;
             }
@@ -135,8 +136,8 @@ var gubiqRouter = function(app) {
     
     app.post("/getWalletBalance", function(req, res) {
 
-        console.log("getWalletBalance");
-        console.log(req.body);
+        log.info("getWalletBalance");
+        log.info(req.body);
         var method = req.body.method;
 
         if(method != 'getWalletBalance' || method === null)
@@ -152,7 +153,7 @@ var gubiqRouter = function(app) {
             }
             else
             {
-                console.log("getWalletBalance: " + JSON.stringify(result));
+                log.info("getWalletBalance: " + JSON.stringify(result));
                 res.status(200).send({result});
                 return;
             }
