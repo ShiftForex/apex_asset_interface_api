@@ -34,17 +34,53 @@ app.use(function (req, res, next) {
     next();
 });
 
-var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+function ensureExists(path, mask, cb) {
+    if (typeof mask == 'function') { // allow the `mask` parameter to be optional
+        cb = mask;
+        mask = 0777;
+    }
+    fs.mkdir(path, mask, function(err) {
+        if (err) {
+            if (err.code == 'EEXIST') cb(false, "FolderExists"); // ignore the error if the folder already exists
+            else cb(true, err); // something else went wrong
+        } else cb(false, "FolderCreated"); // successfully created folder
+    });
+}
+
+ensureExists(__dirname + '/logs', 0755, function(err, result) {
+    if (err) {
+		console.log("Could not create the logs folder");
+	}
+    else {
+		if(result === "FolderExists")
+			console.log("logs folder already exists");
+		else if(result === "FolderCreated")
+			console.log("logs folder created successfully!!");
+	}
+});
+
+// create a rolling file logger based on date/time that fires process events
+var opts = {
+    logDirectory: __dirname + '/logs',
+    fileNamePattern: 'gubiq_app-<date>.log',
+    dateFormat:'YYYY.MM.DD-HHa'
+};
+
+const log = require('simple-node-logger').createRollingFileLogger( opts );
+/*var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 console.log = function(d) { //
   log_file.write(util.format(d) + '\n');
   log_stdout.write(util.format(d) + '\n');
-};
+};*/
  
 var gubiqRoutes = require("./routes/gubiq-query.js")(app);
 var gubiqAccountRoutes = require("./routes/gubiqAccount.js")(app);
 var websocketRoutes = require("./lib/websocketClient.js");
  
 var server = app.listen(6000, function () {
-    console.log("Listening on port %s...", server.address().port);
+    log.info("Listening on port %s...", server.address().port);
+	var appender = log.getAppenders()[0];
+	console.log('The logs are written to the following file: ', appender.__protected().currentFile );
+	console.log("Application started successfully!!");
 });
