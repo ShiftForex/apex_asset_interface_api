@@ -62,7 +62,7 @@ ensureExists(__dirname + '/logs', 0755, function(err, result) {
 var opts = {
     logDirectory: __dirname + '/logs',
     fileNamePattern: 'gubiq_app-<date>.log',
-    dateFormat:'YYYY.MM.DD-HHa'
+    dateFormat:'YYYY.MM.DD'
 };
 
 const log = require('simple-node-logger').createRollingFileLogger( opts );
