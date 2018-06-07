@@ -2,10 +2,9 @@ var config = {
     
     port: 6000,
 
-    supportedBlockchains: [
-        'gubiq',
-        'iota'
-    ],
+    provider:{
+        name: 'iota',
+    },
 
     /* Network configuration */
     gubiqNetworkHost: "http://68.168.208.245",

@@ -1,28 +1,26 @@
 // routes/index.js
 const fs = require('fs')
-const validFileTypes = ['js'];
+const validFileTypes = ['js']
 
 function requireFiles(directory, app) {
   fs.readdirSync(directory).forEach(function (fileName) {
     // Recurse if directory
     if(fs.lstatSync(directory + '/' + fileName).isDirectory()) {
-      requireFiles(directory + '/' + fileName, app);
+      requireFiles(directory + '/' + fileName, app)
     } else {
 
       // Skip this file
-      if(fileName === 'index.js' && directory === __dirname) return;
+      if(fileName === 'index.js' && directory === __dirname) return
 
       // Skip unknown filetypes
-      if(validFileTypes.indexOf(fileName.split('.').pop()) === -1) return;
+      if(validFileTypes.indexOf(fileName.split('.').pop()) === -1) return
 
       // Require the file.
-      require(directory + '/' + fileName)(app);
+      require(directory + '/' + fileName)(app)
     }
   })
 }
 
 module.exports = function (app) {
-
-  console.log('loading routes...')
-  requireFiles(__dirname, app);
+  requireFiles(__dirname, app)
 }
