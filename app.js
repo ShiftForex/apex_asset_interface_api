@@ -5,7 +5,7 @@ const fs = require('fs')
 const util = require('util')
 
 const config = require("./config.js")
-const initializeWebSocketClient = require("./lib/websocketClient.js")
+const WebSocketService = require("./lib/websocketService.js")
 const loadRoutes = require('./routes')
 let logger
 
@@ -24,9 +24,10 @@ const main = async () => {
         await app.listen(config.port)
 
         // initialize webSocketClient
-        await initializeWebSocketClient(logger)
+        const websocketService = new WebSocketService({ ...config, logger })
+        
 
-        logger.log(`apex_wallet_api started successfully on port ${config.port}`)
+        logger.log(`apex_wallet_api started successfully on port ${config.express.port}`)
     } catch (error) {
         logger.log(error)
     }
@@ -66,10 +67,7 @@ function initializeExpressApp(app){
 
     } catch(error) {
         logger.log(`error in initializeExpressApp: ${error}`)
-
-    }
-
-    
+    }    
 }
 
 async function initializeLogger() {

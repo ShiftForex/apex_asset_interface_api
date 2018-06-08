@@ -1,9 +1,14 @@
 var config = {
+    express:{
+        port: 6000,
+    },
     
-    port: 6000,
-
-    provider:{
-        name: 'iota',
+    asset:{
+        name: 'gubiq',
+         /* Asset Manger connection config */
+        AMUserName: "UBIQTest",
+        AMUserPassword: "1234",
+        AssetManagerID: 1,
     },
 
     /* Network configuration */
@@ -28,10 +33,7 @@ var config = {
     TimeInterval: 10000,
     walletTimeInterval: 60000,
 
-    /* Asset Manger connection config */
-    AMUserName: "UBIQTest",
-    AMUserPassword: "1234",
-    AssetManagerID: 1,
+   
 
     logOptions: {
         logDirectory: __dirname + '/logs',
