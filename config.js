@@ -6,7 +6,7 @@ var config = {
     asset:{
         name: 'gubiq',
          /* Asset Manger connection config */
-        AMUserName: "UBIQTest",
+        AMUserName: "su",
         AMUserPassword: "1234",
         AssetManagerID: 1,
     },
@@ -14,7 +14,7 @@ var config = {
     /* Network configuration */
     gubiqNetworkHost: "http://68.168.208.245",
     gubiqNetworkPort: 8589,
-    websocketURL: "ws://localhost:14000/ws/",
+    websocketURL: "ws://167.114.188.251:14000/ws/",
     env: 'Mainnet', //prod
 
     /* Account configuration*/
